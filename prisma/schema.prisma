@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,14 +8,53 @@ datasource db {
 }
 
 model Movie {
-  id           Int    @unique @default(autoincrement())
+  movie_id     Int    @unique @default(autoincrement())
   title        String
-  image        String
-  movie_banner String
-  description  String @db.LongText
-  director     String
-  producer     String
-  release_date Int
+  image_url    String
+  year         Int
   running_time Int
-  rt_score     Int
+
+  watched_movie Watched_movie[]
+  avaliation    Avaliation[]
+}
+
+model User {
+  user_id       Int    @unique @default(autoincrement())
+  username      String
+  name          String
+  hash_password String
+
+  watched_movie Watched_movie[]
+  avaliation    Avaliation[]
+  comment       Comment[]
+}
+
+model Watched_movie {
+  watched_id Int @unique @default(autoincrement())
+  movie_id   Int
+  user_id    Int
+
+  movie Movie @relation(fields: [movie_id], references: [movie_id])
+  user  User  @relation(fields: [user_id], references: [user_id])
+}
+
+model Avaliation {
+  avaliation_id Int @unique @default(autoincrement())
+  movie_id      Int
+  user_id       Int
+  score         Int
+
+  movie   Movie     @relation(fields: [movie_id], references: [movie_id])
+  user    User      @relation(fields: [user_id], references: [user_id])
+  comment Comment[]
+}
+
+model Comment {
+  comment_id    Int    @unique @default(autoincrement())
+  avaliation_id Int
+  user_id       Int
+  comment       String @db.Text
+
+  user       User       @relation(fields: [user_id], references: [user_id])
+  avaliation Avaliation @relation(fields: [avaliation_id], references: [avaliation_id])
 }
