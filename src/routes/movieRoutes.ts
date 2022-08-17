@@ -2,6 +2,7 @@ import { Router } from "express";
 import { createMovieAvaliationController } from "../useCases/avaliation/createMovieAvaliation";
 import { getMovieAvaliationsController } from "../useCases/avaliation/getMovieAvaliations";
 import { createCommentController } from "../useCases/comment/createComment";
+import { getAvaliationCommentsController } from "../useCases/comment/getAvaliationComments";
 import { createMovieController } from "../useCases/movie/createMovie";
 import { deleteMovieController } from "../useCases/movie/deleteMovie";
 import { getAllMoviesController } from "../useCases/movie/getAllMovies";
@@ -17,6 +18,7 @@ movieRoutes.delete("/:movie_id", (req, res) => deleteMovieController.handle(req,
 movieRoutes.get("/:movie_id/avaliation", (req, res) => getMovieAvaliationsController.handle(req, res));
 movieRoutes.post("/:movie_id/avaliation", (req, res) => createMovieAvaliationController.handle(req, res));
 
+movieRoutes.get("/:avaliation_id/comment", (req, res) => getAvaliationCommentsController.handle(req, res));
 movieRoutes.post("/:avaliation_id/comment", (req, res) => createCommentController.handle(req, res));
 
 export { movieRoutes };

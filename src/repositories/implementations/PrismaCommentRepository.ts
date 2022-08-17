@@ -8,4 +8,8 @@ export class PrismaCommentRepository implements ICommentRepository {
   public async create(comment: ICreateCommentDTO): Promise<Comment> {
     return await this.prismaClient.comment.create({ data: comment });
   }
+
+  public async findByAvaliationId(avaliation_id: number): Promise<Comment[]> {
+    return await this.prismaClient.comment.findMany({ where: { avaliation_id: avaliation_id } });
+  }
 }
