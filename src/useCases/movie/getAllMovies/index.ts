@@ -1,7 +1,7 @@
 import { prisma } from "../../../infra/database";
 import { PrismaMovieRepository } from "../../../repositories/implementations/PrismaMovieRepository";
-import { GetAllMoviesController } from "./getAllMoviesController";
-import { GetAllMoviesUseCase } from "./getAllMoviesUseCase";
+import { GetAllMoviesController } from "./GetAllMoviesController";
+import { GetAllMoviesUseCase } from "./GetAllMoviesUseCase";
 
 const prismaMovieRepository = new PrismaMovieRepository(prisma);
 const getAllMoviesUseCase = new GetAllMoviesUseCase(prismaMovieRepository);

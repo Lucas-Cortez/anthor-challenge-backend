@@ -9,4 +9,8 @@ export class PrismaUserRepository implements IUserRepository {
     const { password, ...rest } = user;
     return await this.prismaClient.user.create({ data: { ...rest, hash_password: password } });
   }
+
+  public async findByUserName(username: string): Promise<User | null> {
+    return await this.prismaClient.user.findFirst({ where: { username: username } });
+  }
 }

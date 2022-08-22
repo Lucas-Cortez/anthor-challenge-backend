@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GetAllMoviesUseCase } from "./getAllMoviesUseCase";
+import { GetAllMoviesUseCase } from "./GetAllMoviesUseCase";
 
 export class GetAllMoviesController {
   constructor(private getAllMoviesUseCase: GetAllMoviesUseCase) {}
